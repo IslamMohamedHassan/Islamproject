@@ -7,6 +7,11 @@
     <div class="Flom">
     </div>
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+    {{-- for rating --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ asset('assets/css/rate.css') }}">
+    {{-- / for rating --}}
+
     {{-- <style>
         video {
             width: 30%;
@@ -312,14 +317,32 @@
                 </head>
 
                 <body>
-                    {{-- write a reeview  --}}
-                    @if (auth()->check())                       
-                        <div>
-                            <div>
+                    {{-- review  --}}
+                    <div>
+                        <div class="stars__container">
+                            <div class="rating__box">
+                                <header>How Was Your Experience?</header>
+                                <form action="">
+                                    <textarea name="" id="" cols="35" rows="4" placeholder="write a review"
+                                        style="resize:none; margin:10px; border-radius:5px; border:1px solid gray;padding:5px"></textarea>
+                                    <div class="stars">
+                                        <i class="fa-solid fa-star active"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        @if (auth()->check())
+                                            <input type="submit" value="submit" onclick="rates()">
+                                        @else
+                                            <h4><a href="{{route('login')}}">Login</a> to write a review</h4>
+                                        @endif
+                                    </div>
+                                </form>
                             </div>
                         </div>
-                    @endif
-                    {{-- / write a reeview  --}}
+
+                    </div>
+                    {{-- / review  --}}
                     <div class="slideshow-container">
 
                         <div class="mySlides">
@@ -428,7 +451,9 @@
         dots[slideIndex - 1].className += " active";
     }
 </script>
-
+{{-- for rating --}}
+<script src="{{ asset('assets/js/rate.js') }}"></script>
+{{-- /for rating --}}
 </body>
 
 </html>
