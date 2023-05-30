@@ -146,9 +146,9 @@
                 </div>
 
                 <div class="navbar">
-                    <a href="{{route('home')}}">Home</a>
+                    <a href="{{ route('home') }}">Home</a>
                     @if (auth()->check())
-                        <a href="{{ route('logout') }}">(Welcome {{auth()->user()->first_name}}) logout</a>
+                        <a href="{{ route('logout') }}">(Welcome {{ auth()->user()->first_name }}) logout</a>
                     @else
                         <a href="{{ route('register') }}">login</a>
                     @endif
@@ -164,54 +164,17 @@
             <main>
                 <h2></h2>
                 <div class="products">
-                    <div class="product">
-                        <img src="black_hoodie_flom-1-removebg-preview.png" alt="Hoodie1">
-                        <h3></h3>
-                        <p>$50</p>
-                        <a href="hoodi1.html">
-                            <button>View</button>
-                        </a>
-                    </div>
-                    <div class="product">
-                        <img src="beige_hoodie_flom_-1-removebg-preview.png" alt="hoodie2">
-                        <h3></h3>
-                        <p>$60</p>
-                        <a href="hoodie 2.html">
-                            <button>View</button>
-                        </a>
-                    </div>
-                    <div class="product">
-                        <img src="redflom-1-removebg-preview.png" alt="hoodie3">
-                        <h3></h3>
-                        <p>$70</p>
-                        <a href="hoodie 3.html">
-                            <button>View</button>
-                        </a>
-                    </div>
-                    <div class="product">
-                        <img src="grey_hoodie_1-1-removebg-preview.png" alt="hoodie4">
-                        <h3></h3>
-                        <p>$80</p>
-                        <a href="hoodie 4.html">
-                            <button>View</button>
-                        </a>
-                    </div>
-                    <div class="product">
-                        <img src="flom_white_hoodie-removebg-preview.png" alt="hoodie5">
-                        <h3></h3>
-                        <p>$240</p>
-                        <a href="hoodie 5.html">
-                            <button> View </button>
-                        </a>
-                    </div>
-                    <div class="product">
-                        <img src="flom_hoodie_blue-1-removebg-preview.png" alt="Hoodie6">
-                        <h3></h3>
-                        <p>$100</p>
-                        <a href="hoodie 6.html">
-                            <button>View</button>
-                        </a>
-                    </div>
+                    @foreach ($products as $product)
+                        <div class="product">
+                            <img src="{{asset('assets/images/'.$product->image)}}" alt="Hoodie1">
+                            <h3>{{$product->name}}</h3>
+                            <p>${{$product->price}}</p>
+                            <a href="hoodi1.html">
+                                <a href="{{route('product',$product->id)}}"><button>View</button></a>
+                            </a>
+                        </div>
+                    @endforeach
+
                 </div>
             </main>
             <footer>
