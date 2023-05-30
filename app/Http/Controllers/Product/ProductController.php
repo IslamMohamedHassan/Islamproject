@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     public function viewProduct(Request $request){
-        $users= UserModel::rightJoin('product_reviews', 'product_reviews.user_id' , '=' , 'users.id')->get(); 
+        $users= UserModel::rightJoin('product_reviews', 'product_reviews.user_id' , '=' , 'users.id')->where('product_reviews.product_id',$request->id)->get(); 
         $product = ProductModel::where('id', $request->id)->first(); 
         return view('product.view' , ['product'=>$product,'users'=>$users]) ;
     }
