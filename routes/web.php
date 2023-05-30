@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Home\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +15,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//root
+Route::get('' , fn()=>redirect(route('home'))); 
+
+//main page
+Route::get('/home' ,[HomeController::class , 'index'])->name('home'); 
+
+//auth
+Route::get('login' ,[AuthController::class , 'register'])->name('register'); 
+Route::post('store-user' ,[AuthController::class , 'storeUser'])->name('storeUser'); 
+Route::get('logout' ,[AuthController::class , 'logout'])->name('logout'); 
+
+
+Route::get('dd' , function (){
+    dd(session()->all()); 
+}); 
