@@ -38,3 +38,10 @@ Route::get('product/{id}' ,[ProductController::class , 'viewProduct'])->name('pr
 //cart 
 Route::get('cart', [CartController::class , 'viewCart'])->name('cart'); 
 Route::get('add-to-cart', [CartController::class , 'addToCart'])->name('addToCart'); 
+
+
+
+Route::get('dd', function(){
+    // return session()->all(); 
+    // session()->remove('cart'); 
+}); 

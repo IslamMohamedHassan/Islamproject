@@ -12,6 +12,11 @@
     <link rel="stylesheet" href="{{ asset('assets/css/rate.css') }}">
     {{-- / for rating --}}
 
+    {{-- for review stars --}}
+    <link rel="stylesheet" href="{{ asset('assets/css/review_stars.css') }}">
+    {{-- / for review stars --}}
+
+
     {{-- <style>
         video {
             width: 30%;
@@ -360,18 +365,14 @@
                         @foreach ($users as $user)
                             <div class="mySlides">
                                 <P>
-                                <div class="rating">
-
-                                    <input {{($user->review_rate == 5)? 'checked' : null}} type="radio" id="star5" name="rate" value="5">
-                                    <label for="star5" title="text"></label>
-                                    <input {{($user->review_rate == 4)? 'checked' : null}} type="radio" id="star4" name="rate" value="4">
-                                    <label for="star4" title="text"></label>
-                                    <input {{($user->review_rate == 3)? 'checked' : null}} type="radio" id="star3" name="rate" value="3">
-                                    <label for="star3" title="text"></label>
-                                    <input {{($user->review_rate == 2)? 'checked' : null}} type="radio" id="star2" name="rate" value="2">
-                                    <label for="star2" title="text"></label>
-                                    <input {{($user->review_rate == 1)? 'checked' : null}} type="radio" id="star1" name="rate" value="1">
-                                    <label for="star1" title="text"></label>
+                                <div class="ratings">
+                                    @for ($i = 1; $i <= 5; $i++)
+                                        @if ($user->review_rate >= $i)
+                                            <i class="fa fa-star rating-color"></i>
+                                        @else
+                                            <i class="fa fa-star"></i>
+                                        @endif
+                                    @endfor
                                 </div>
                                 </P>
                                 <q>{{ $user->review }}</q>
