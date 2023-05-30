@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Cart\CartController;
 use App\Http\Controllers\Home\HomeController;
 use App\Http\Controllers\Product\ProductController;
 use Illuminate\Support\Facades\Route;
@@ -30,7 +31,6 @@ Route::get('logout' ,[AuthController::class , 'logout'])->name('logout');
 //products
 Route::get('product/{id}' ,[ProductController::class , 'viewProduct'])->name('product'); 
 
-
-Route::get('dd' , function (){
-    dd(session()->all()); 
-}); 
+//cart 
+Route::get('cart', [CartController::class , 'viewCart'])->name('cart'); 
+Route::get('add-to-cart', [CartController::class , 'addToCart'])->name('addToCart'); 

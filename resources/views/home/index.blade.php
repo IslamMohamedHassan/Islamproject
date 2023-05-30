@@ -153,7 +153,7 @@
                         <a href="{{ route('register') }}">login</a>
                     @endif
                     <a href="mailto:floomm10@gmail.com">Contact Us</a>
-                    <a href="cart.html" class="right">Cart</a>
+                    <a href="{{route('cart')}}" class="right">Cart</a>
                 </div>
             </body>
 
