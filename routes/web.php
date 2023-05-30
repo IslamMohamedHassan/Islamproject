@@ -42,7 +42,9 @@ Route::get('remove-cart-item/{index}', [CartController::class , 'removeCartItem'
 
 
 
+
+//FOR TESTING
 Route::get('dd', function(){
-    return session()->all(); 
-    // session()->remove('cart'); 
+    // return session()->all(); 
+    session()->remove('cart'); 
 }); 

@@ -132,7 +132,7 @@
                             <tr>
                                 <td>Item 1</td>
                                 <td>
-                                    <p>Description of item 1</p>
+                                    <p>{{$product->name}}</p>
                                     <select>
                                         @foreach ($sizes as $size)
                                             @if ($size == $product['size'])
@@ -143,38 +143,40 @@
                                         @endforeach
                                     </select>
                                 </td>
-                                <td>${{$product['price']}}</td>
-                                <td><input type="number" value="1"></td>
-                                <td>$10.00</td>
-                                <td><a href="{{route('cart.removeItem' , $loop->index)}}">
-									<button>Remove</button>
-								</a></td>
+                                <td>${{ $product['price'] }}</td>
+                                <td><input type="number" value="1" disabled></td>
+                                <td>${{ $product['price'] }}</td>
+                                <td><a href="{{ route('cart.removeItem', $loop->index) }}">
+                                        <button>Remove</button>
+                                    </a></td>
                             </tr>
                         @endforeach
                     @endif
 
                 </tbody>
                 <tfoot>
-                    <tr>
-                        <td colspan="4" align="right">Subtotal:</td>
-                        <td>$20.00</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td colspan="4" align="right">Tax:</td>
-                        <td>$1.00</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td colspan="4" align="right">Shipping:</td>
-                        <td>$5.00</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td colspan="4" align="right">Total:</td>
-                        <td>$26.00</td>
-                        <td></td>
-                    </tr>
+                    @if ($products)
+                        <tr>
+                            <td colspan="4" align="right">Subtotal:</td>
+                            <td>${{ $subTotal }}</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" align="right">Tax:</td>
+                            <td>${{ $tax }}</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" align="right">Shipping:</td>
+                            <td>${{ $shipping }}</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" align="right">Total:</td>
+                            <td>${{ $total }}</td>
+                            <td></td>
+                        </tr>
+                    @endif
                 </tfoot>
             </table>
             <div style="margin-top:10px">
@@ -182,6 +184,7 @@
                 <a href="{{ route('home') }}" class="checkout-btn">Back</a>
             </div>
         </div>
+        <script src="{{ asset('assets/js/cart.js') }}"></script>
 </body>
 
 </html>

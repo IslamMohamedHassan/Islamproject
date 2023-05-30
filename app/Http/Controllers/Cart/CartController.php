@@ -12,9 +12,13 @@ class CartController extends Controller
     public function viewCart(){
         $items=session('cart'); 
         $products= []; 
+        $subTotal=0; 
+        $shipping=5;
+        $tax=5;
         if($items){
             foreach($items as $item){
                 $product= ProductModel::where('id', $item['id'])->first(); 
+                $subTotal+=$product->price; 
                 $product['size']=$item['size']; 
                 $products[]=$product; 
             }
@@ -22,7 +26,11 @@ class CartController extends Controller
         $sizes=['XS','S','M','L','XL','XXL','XXXL'];         
         return view('cart.view' , [
             'products'=>$products,
-            'sizes'=>$sizes
+            'sizes'=>$sizes,
+            'subTotal'=>$subTotal,
+            'tax'=>$tax,
+            'shipping'=>$shipping,
+            'total' =>$subTotal+$tax+$shipping
             ]);
     }
     public function addToCart(Request $request){
