@@ -11,7 +11,13 @@ use Illuminate\Support\Facades\Hash;
 class AuthController extends Controller
 {
     public function login(){
-        return "login";
+        return view('auth.login');
+    }
+    public function loginAuth(Request $request){
+        if (Auth::attempt(['email'=>$request->email , 'password'=>$request->password])){
+            return redirect(route('home'));
+        }
+        return back()->withErrors('Invalid Email or password'); 
     }
     public function auth(array $credential){
         Auth::attempt(['email'=>$credential['email'] , 'password'=>$credential['password'] ]);

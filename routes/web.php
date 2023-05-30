@@ -24,7 +24,9 @@ Route::get('' , fn()=>redirect(route('home')));
 Route::get('/home' ,[HomeController::class , 'index'])->name('home'); 
 
 //auth
-Route::get('login' ,[AuthController::class , 'register'])->name('register'); 
+Route::get('register' ,[AuthController::class , 'register'])->name('register'); 
+Route::get('login' ,[AuthController::class , 'login'])->name('login'); 
+Route::post('login-auth' ,[AuthController::class , 'loginAuth'])->name('login.auth'); 
 Route::post('store-user' ,[AuthController::class , 'storeUser'])->name('storeUser'); 
 Route::get('logout' ,[AuthController::class , 'logout'])->name('logout'); 
 

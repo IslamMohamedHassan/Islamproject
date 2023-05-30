@@ -150,10 +150,11 @@
                     @if (auth()->check())
                         <a href="{{ route('logout') }}">(Welcome {{ auth()->user()->first_name }}) logout</a>
                     @else
-                        <a href="{{ route('register') }}">login</a>
+                        <a href="{{ route('register') }}">Sign Up</a>
+                        <a href="{{ route('login') }}">login</a>
                     @endif
                     <a href="mailto:floomm10@gmail.com">Contact Us</a>
-                    <a href="{{route('cart')}}" class="right">Cart</a>
+                    <a href="{{ route('cart') }}" class="right">Cart</a>
                 </div>
             </body>
 
@@ -166,11 +167,11 @@
                 <div class="products">
                     @foreach ($products as $product)
                         <div class="product">
-                            <img src="{{asset('assets/images/'.$product->image)}}" alt="Hoodie1">
-                            <h3>{{$product->name}}</h3>
-                            <p>${{$product->price}}</p>
+                            <img src="{{ asset('assets/images/' . $product->image) }}" alt="Hoodie1">
+                            <h3>{{ $product->name }}</h3>
+                            <p>${{ $product->price }}</p>
                             <a href="hoodi1.html">
-                                <a href="{{route('product',$product->id)}}"><button>View</button></a>
+                                <a href="{{ route('product', $product->id) }}"><button>View</button></a>
                             </a>
                         </div>
                     @endforeach
@@ -311,9 +312,14 @@
                 </head>
 
                 <body>
-
-
-
+                    {{-- write a reeview  --}}
+                    @if (auth()->check())                       
+                        <div>
+                            <div>
+                            </div>
+                        </div>
+                    @endif
+                    {{-- / write a reeview  --}}
                     <div class="slideshow-container">
 
                         <div class="mySlides">

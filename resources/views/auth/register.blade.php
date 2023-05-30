@@ -76,6 +76,7 @@
       <input type="email" placeholder="Email" required name="email">
       <input type="password" placeholder="Password" required name="password">
       <input type="submit" value="Sign In">
+      <a href="{{route('login')}}" style="display:block;margin:20px 0px 10px">Already have account</a>
       <a href="{{route('home')}}" class="back-button">Back</a>
     </form>
   </body>
