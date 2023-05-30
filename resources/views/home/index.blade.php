@@ -322,21 +322,34 @@
                         <div class="stars__container">
                             <div class="rating__box">
                                 <header>How Was Your Experience?</header>
-                                <form action="">
-                                    <textarea name="" id="" cols="35" rows="4" placeholder="write a review"
-                                        style="resize:none; margin:10px; border-radius:5px; border:1px solid gray;padding:5px"></textarea>
-                                    <div class="stars">
-                                        <i class="fa-solid fa-star active"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        @if (auth()->check())
-                                            <input type="submit" value="submit" onclick="rates()">
-                                        @else
-                                            <h4><a href="{{route('login')}}">Login</a> to write a review</h4>
-                                        @endif
-                                    </div>
+                                <form action="{{ route('home.storeUserReview') }}" method="get">
+                                    <textarea name="review_text" id="" cols="35" rows="4" placeholder="write a review"
+                                        style="resize:none; margin:10px; border-radius:5px; border:1px solid gray;padding:5px">{{ (auth()->check())? auth()->user()->review : null }}</textarea>
+                                    @if (auth()->check())
+                                        <div class="stars" id="rate-div">
+                                            @for ($i = 1; $i <= 5; $i++)
+                                                @if (auth()->user()->review_rate >= $i)
+                                                    <i class="fa-solid fa-star active"><input type="hidden"
+                                                            value="{{$i}}"></i>
+                                                @else
+                                                    <i class="fa-solid fa-star"><input type="hidden"
+                                                            value="{{$i}}"></i>
+                                                @endif
+                                            @endfor
+                                            <input type="hidden" id="rate-value" name="rate" value="1">
+                                            <input type="submit" value="submit" onclick="rates()"> 
+                                        </div>
+                                    @else
+                                        <div class="stars" id="rate-div">
+                                            <i class="fa-solid fa-star active"><input type="hidden" value='1'></i>
+                                            <i class="fa-solid fa-star"><input type="hidden" value='2'></i>
+                                            <i class="fa-solid fa-star"><input type="hidden" value='3'></i>
+                                            <i class="fa-solid fa-star"><input type="hidden" value='4'></i>
+                                            <i class="fa-solid fa-star"><input type="hidden" value='5'></i>
+                                            <input type="hidden" id="rate-value" name="rate" value="1">
+                                            <h4><a href="{{ route('login') }}">Login</a> to write a review</h4>
+                                        </div>
+                                    @endif
                                 </form>
                             </div>
                         </div>
@@ -454,6 +467,7 @@
 {{-- for rating --}}
 <script src="{{ asset('assets/js/rate.js') }}"></script>
 {{-- /for rating --}}
+
 </body>
 
 </html>

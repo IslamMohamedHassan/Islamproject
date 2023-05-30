@@ -22,4 +22,15 @@ function rates() {
     // alert(x);
   }
    
-    
+
+//####################### for backend
+const rateDiv = document.querySelector('#rate-div'); 
+const rateValue = document.querySelector('#rate-value'); 
+
+rateDiv.addEventListener('click',(event)=>{
+    //rate value in hidden input 
+    if (event.target.nodeName == 'I'){
+       let value = event.target.children[0].value; 
+        rateValue.value=value; 
+    }
+}); 

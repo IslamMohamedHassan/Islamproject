@@ -22,6 +22,8 @@ Route::get('' , fn()=>redirect(route('home')));
 
 //main page
 Route::get('/home' ,[HomeController::class , 'index'])->name('home'); 
+Route::get('store-user-review' , [HomeController::class , 'storeUserReview'])->name('home.storeUserReview'); 
+
 
 //auth
 Route::get('register' ,[AuthController::class , 'register'])->name('register'); 

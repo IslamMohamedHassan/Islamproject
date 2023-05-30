@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('last_name');
             $table->string('email')->unique();
             $table->string('password');
+            $table->integer('review_rate')->nullable(); 
+            $table->text('review')->nullable(); 
             $table->rememberToken();
             $table->timestamps();
         });
