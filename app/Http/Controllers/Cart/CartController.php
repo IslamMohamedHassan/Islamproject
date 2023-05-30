@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Cart;
 
 use App\Http\Controllers\Controller;
+use App\Models\ProductModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -10,10 +11,19 @@ class CartController extends Controller
 {
     public function viewCart(){
         $items=session('cart'); 
-        dd($items); 
+        $products= []; 
         if($items){
+            foreach($items as $item){
+                $product= ProductModel::where('id', $item['id'])->first(); 
+                $product['size']=$item['size']; 
+                $products[]=$product; 
+            }
         }
-        return view('cart.view' , ['items'=>$items]);
+        $sizes=['XS','S','M','L','XL','XXL','XXXL'];         
+        return view('cart.view' , [
+            'products'=>$products,
+            'sizes'=>$sizes
+            ]);
     }
     public function addToCart(Request $request){
         //add items using session
@@ -25,5 +35,14 @@ class CartController extends Controller
             session(['cart'=>[$request->toArray()]]); 
         }; 
         return redirect(route('home')); 
+    }
+    public function removeCartItem(Request $request){
+        $items = session('cart'); 
+        $items= array_values($items) ; 
+        if ($items){
+            unset($items[$request->index]);
+        }
+        session(['cart'=>$items]); 
+        return back(); 
     }
 }

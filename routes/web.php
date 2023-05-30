@@ -38,10 +38,11 @@ Route::get('product/{id}' ,[ProductController::class , 'viewProduct'])->name('pr
 //cart 
 Route::get('cart', [CartController::class , 'viewCart'])->name('cart'); 
 Route::get('add-to-cart', [CartController::class , 'addToCart'])->name('addToCart'); 
+Route::get('remove-cart-item/{index}', [CartController::class , 'removeCartItem'])->name('cart.removeItem'); 
 
 
 
 Route::get('dd', function(){
-    // return session()->all(); 
+    return session()->all(); 
     // session()->remove('cart'); 
 }); 
