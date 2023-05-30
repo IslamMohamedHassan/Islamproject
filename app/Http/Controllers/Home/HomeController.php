@@ -11,7 +11,7 @@ class HomeController extends Controller
 {
     public function index(){
         $products = ProductModel::get(); 
-        $users=UserModel::select('first_name' , 'last_name' , 'review_rate' , 'review')->get(); 
+        $users=UserModel::select('first_name' , 'last_name' , 'review_rate' , 'review')->orderBy('review_rate','desc')->get(); 
         return view('home.index', [
             'products'=>$products,
             'users'=>$users
