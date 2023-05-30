@@ -324,20 +324,20 @@
                                 <header>How Was Your Experience?</header>
                                 <form action="{{ route('home.storeUserReview') }}" method="get">
                                     <textarea name="review_text" id="" cols="35" rows="4" placeholder="write a review"
-                                        style="resize:none; margin:10px; border-radius:5px; border:1px solid gray;padding:5px">{{ (auth()->check())? auth()->user()->review : null }}</textarea>
+                                        style="resize:none; margin:10px; border-radius:5px; border:1px solid gray;padding:5px">{{ auth()->check() ? auth()->user()->review : null }}</textarea>
                                     @if (auth()->check())
                                         <div class="stars" id="rate-div">
                                             @for ($i = 1; $i <= 5; $i++)
                                                 @if (auth()->user()->review_rate >= $i)
                                                     <i class="fa-solid fa-star active"><input type="hidden"
-                                                            value="{{$i}}"></i>
+                                                            value="{{ $i }}"></i>
                                                 @else
                                                     <i class="fa-solid fa-star"><input type="hidden"
-                                                            value="{{$i}}"></i>
+                                                            value="{{ $i }}"></i>
                                                 @endif
                                             @endfor
                                             <input type="hidden" id="rate-value" name="rate" value="1">
-                                            <input type="submit" value="submit" onclick="rates()"> 
+                                            <input type="submit" value="submit" onclick="rates()">
                                         </div>
                                     @else
                                         <div class="stars" id="rate-div">
@@ -357,69 +357,32 @@
                     </div>
                     {{-- / review  --}}
                     <div class="slideshow-container">
+                        @foreach ($users as $user)
+                            <div class="mySlides">
+                                <P>
+                                <div class="rating">
 
-                        <div class="mySlides">
-                            <P>
-                            <div class="rating">
-
-                                <input type="radio" id="star5" name="rate" value="5">
-                                <label for="star5" title="text"></label>
-                                <input type="radio" id="star4" name="rate" value="4">
-                                <label for="star4" title="text"></label>
-                                <input checked="" type="radio" id="star3" name="rate" value="3">
-                                <label for="star3" title="text"></label>
-                                <input type="radio" id="star2" name="rate" value="2">
-                                <label for="star2" title="text"></label>
-                                <input type="radio" id="star1" name="rate" value="1">
-                                <label for="star1" title="text"></label>
+                                    <input {{($user->review_rate == 5)? 'checked' : null}} type="radio" id="star5" name="rate" value="5">
+                                    <label for="star5" title="text"></label>
+                                    <input {{($user->review_rate == 4)? 'checked' : null}} type="radio" id="star4" name="rate" value="4">
+                                    <label for="star4" title="text"></label>
+                                    <input {{($user->review_rate == 3)? 'checked' : null}} type="radio" id="star3" name="rate" value="3">
+                                    <label for="star3" title="text"></label>
+                                    <input {{($user->review_rate == 2)? 'checked' : null}} type="radio" id="star2" name="rate" value="2">
+                                    <label for="star2" title="text"></label>
+                                    <input {{($user->review_rate == 1)? 'checked' : null}} type="radio" id="star1" name="rate" value="1">
+                                    <label for="star1" title="text"></label>
+                                </div>
+                                </P>
+                                <q>{{ $user->review }}</q>
+                                <p class="author">- {{ $user->first_name }} {{ $user->last_name }}</p>
                             </div>
-                            </P>
-                            <q>I love you the more in that I believe you had liked me for my own sake and for nothing
-                                else</q>
-                            <p class="author">- John Keats</p>
-                        </div>
-
-                        <div class="mySlides">
-                            <div class="rating">
-
-                                <input type="radio" id="star5" name="rate" value="5">
-                                <label for="star5" title="text"></label>
-                                <input type="radio" id="star4" name="rate" value="4">
-                                <label for="star4" title="text"></label>
-                                <input checked="" type="radio" id="star3" name="rate" value="3">
-                                <label for="star3" title="text"></label>
-                                <input type="radio" id="star2" name="rate" value="2">
-                                <label for="star2" title="text"></label>
-                                <input type="radio" id="star1" name="rate" value="1">
-                                <label for="star1" title="text"></label>
-                            </div>
-                            <q>But man is not made for defeat. A man can be destroyed but not defeated.</q>
-                            <p class="author">- Ernest Hemingway</p>
-                        </div>
-
-                        <div class="mySlides">
-                            <div class="rating">
-
-                                <input type="radio" id="star5" name="rate" value="5">
-                                <label for="star5" title="text"></label>
-                                <input type="radio" id="star4" name="rate" value="4">
-                                <label for="star4" title="text"></label>
-                                <input checked="" type="radio" id="star3" name="rate" value="3">
-                                <label for="star3" title="text"></label>
-                                <input type="radio" id="star2" name="rate" value="2">
-                                <label for="star2" title="text"></label>
-                                <input type="radio" id="star1" name="rate" value="1">
-                                <label for="star1" title="text"></label>
-                            </div>
-                            <q>I have not failed. I've just found 10,000 ways that won't work.</q>
-                            <p class="author">- Thomas A. Edison</p>
-                        </div>
+                        @endforeach
 
                         <a class="prev" onclick="plusSlides(-1)">❮</a>
                         <a class="next" onclick="plusSlides(1)">❯</a>
 
                     </div>
-
                     <div class="dot-container">
                         <span class="dot" onclick="currentSlide(1)"></span>
                         <span class="dot" onclick="currentSlide(2)"></span>
