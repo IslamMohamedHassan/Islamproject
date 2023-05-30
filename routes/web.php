@@ -34,6 +34,7 @@ Route::get('logout' ,[AuthController::class , 'logout'])->name('logout');
 
 //products
 Route::get('product/{id}' ,[ProductController::class , 'viewProduct'])->name('product'); 
+Route::get('product/review/store-user-review' ,[ProductController::class , 'storeUserReview'])->name('product.storeProductReview'); 
 
 //cart 
 Route::get('cart', [CartController::class , 'viewCart'])->name('cart'); 

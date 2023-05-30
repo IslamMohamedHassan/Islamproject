@@ -130,7 +130,7 @@
                     @if ($products)
                         @foreach ($products as $product)
                             <tr>
-                                <td>Item 1</td>
+                                <td>{{$loop->index+1}}</td>
                                 <td>
                                     <p>{{$product->name}}</p>
                                     <select>
